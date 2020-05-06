@@ -1,4 +1,8 @@
 #!/bin/sh
+set -eu
+IFS="$(printf '%b_' '\n\t ')"
+IFS="${IFS%_}"
+
 VIRTUALBOX_ID="$(cat .vagrant/machines/default/virtualbox/id)" &&
     vboxmanage list vms |
     awk "{ match(\$0, /\"(.+)\"\\s\\{$VIRTUALBOX_ID\\}/, name); if (length(name[1]) > 0) { print name[1] } }"
